@@ -42,10 +42,7 @@
                           <section class="common-box">
                             <div class="container">
                               <div class="section-title center-align">
-                                <h2>Log in / Register with your GTopiaID</h2>
-                              </div>
-                              <div class="center-align">
-                                <small style="color: red;">*</small> <small>Register a new account with the form below, or log in to an existing account.</small>
+                                <h2>Log in with your GTopiaID</h2>
                               </div>
                               <div class="row div-content-center">
                                 <div class="col-md-12 col-sm-12">
@@ -57,17 +54,35 @@
                                     <div class="form-group">
                                       <input id="password" class="form-control grow-text" placeholder="Your GTopiaID Password *" name="password" type="password" minlength="4" maxlength="18" required/>
                                     </div>
-                                    <div class="form-group">
-                                      <input id="email" class="form-control grow-text" placeholder="Your Email (required for new accounts)" name="email" type="email" autocomplete="email"/>
-                                    </div>
                                     <div class="form-group text-center">
-                                      <input class="btn btn-lg btn-primary grow-button" type="submit" value="Log in / Register"/>
+                                      <input class="btn btn-lg btn-primary grow-button" type="submit" value="Log in"/>
                                     </div>
                                   </form>
+                                  <p class="center-align" style="margin-top: 12px; font-size: 14px;">
+                                    Don't have an account?
+                                    <a href="#" id="createGrowid" style="color: #2d9cdb; font-weight: bold;">Create a growid</a>
+                                  </p>
+                                  <p class="center-align" style="margin-top: 4px; font-size: 12px; color: #888;">
+                                    New players must register through this page before playing.
+                                  </p>
+                                  <div id="registerContainer" style="display: none; margin-top: 18px; border-top: 1px solid #e2e2e2; padding-top: 18px;">
+                                    <form method="POST" action="/player/growid/login/validate" accept-charset="UTF-8" class="" role="form" autocomplete="off" id="registerForm">
+                                      <input name="_token" type="hidden" value="<%= token %>"/>
+                                      <div class="form-group">
+                                        <input id="reg-growid" class="form-control grow-text" placeholder="Choose your GTopiaID *" name="growId" type="text" minlength="3" maxlength="18" required/>
+                                      </div>
+                                      <div class="form-group">
+                                        <input id="reg-password" class="form-control grow-text" placeholder="Create a password *" name="password" type="password" minlength="4" maxlength="18" required/>
+                                      </div>
+                                      <div class="form-group">
+                                        <input id="reg-email" class="form-control grow-text" placeholder="Your Email (for password recovery) *" name="email" type="email" required/>
+                                      </div>
+                                      <div class="form-group text-center">
+                                        <input class="btn btn-lg btn-primary grow-button" type="submit" value="Create GrowID"/>
+                                      </div>
+                                    </form>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="center-align">
-                                <small>Leave the email empty to log in to an existing account. Registering creates your new account so you can play.</small>
                               </div>
                             </div>
                           </section>
@@ -123,6 +138,34 @@
       $("#modalButton").trigger("click");
       $(".close").on("click", function () {
         window.location = "/player/validate/close";
+      });
+
+      // Toggle between login and register modes.
+      let registerMode = false;
+      function toggleRegister(show) {
+        registerMode = show;
+        $("#registerContainer").toggle(show);
+        if (show) {
+          $("#login-name").closest(".form-group").hide();
+          $("#password").closest(".form-group").hide();
+        } else {
+          $("#login-name").closest(".form-group").show();
+          $("#password").closest(".form-group").show();
+        }
+      }
+      $("#createGrowid").on("click", function (e) {
+        e.preventDefault();
+        toggleRegister(!registerMode);
+      });
+      // When registering, require name + password + email.
+      $("#registerForm").on("submit", function (e) {
+        const g = $("#reg-growid").val();
+        const p = $("#reg-password").val();
+        const em = $("#reg-email").val();
+        if (!g || !p || !em || p.length < 4 || g.length < 3) {
+          e.preventDefault();
+          alert("Please fill in a valid GrowID (3-18 chars), password (4-18 chars) and email.");
+        }
       });
       // $('form').submit($('form .grow-button').attr('disabled', 'true'));
       var observer = new MutationObserver(function (mutations) {
