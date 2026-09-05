@@ -1,0 +1,17 @@
+{
+  "name": "gtopia-login",
+  "version": "1.0.0",
+  "description": "Login server for GTopia",
+  "license": "MIT",
+  "author": "keichira",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2"
+  }
+}
