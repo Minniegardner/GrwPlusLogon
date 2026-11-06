@@ -1,101 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: rgba(0, 0, 0, 0); width: 100%; height: 100%">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#111827" />
-    <title>GTopia Player Support</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growtopia Player Support</title>
+    <link rel="icon" type="image/png" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" sizes="16x16"/>
+    <link rel="shortcut icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon"/>
+    <link rel="icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon"/>
+    <!-- include bootstrap and custom  css -->
+    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/faq-main.css"/>
+    <!-- include custom  css -->
+    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/shop-custom.css"/>
+    <link media="all" rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/css/ingame-custom.css"/>
     <style>
-      :root { color-scheme: light; --ink: #172033; --muted: #718096; --line: #e5e9f0; --accent: #2d9cdb; --accent-dark: #237fb2; --surface: #fff; --page: #f3f6fa; }
-      * { box-sizing: border-box; }
-      html, body { min-height: 100%; }
-      body { margin: 0; display: grid; place-items: center; padding: 24px 16px; background: radial-gradient(circle at 10% 0%, rgba(45,156,219,.14), transparent 34%), linear-gradient(145deg, var(--page), #eef2f7); color: var(--ink); font: 400 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      .login-shell { width: min(100%, 470px); animation: enter .35s ease-out both; }
-      .login-card { overflow: hidden; border: 1px solid rgba(255,255,255,.85); border-radius: 18px; background: var(--surface); box-shadow: 0 18px 55px rgba(23,32,51,.12); }
-      .card-header { padding: 32px 32px 25px; text-align: center; background: linear-gradient(140deg, #172033, #253653); color: #fff; }
-      .brand-mark { display: inline-grid; width: 46px; height: 46px; place-items: center; margin-bottom: 12px; border-radius: 13px; background: linear-gradient(145deg, #55c5f5, var(--accent)); box-shadow: 0 8px 18px rgba(45,156,219,.28); font-size: 21px; font-weight: 800; }
-      h1 { margin: 0; font-size: 23px; letter-spacing: -.3px; }
-      .subtitle { margin: 7px 0 0; color: #cbd7e8; font-size: 13px; }
-      .card-body { padding: 28px 32px 30px; }
-      .form-group { margin-bottom: 16px; }
-      label { display: block; margin: 0 0 7px; color: #44516a; font-size: 13px; font-weight: 650; }
-      .form-control { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 12px 13px; outline: 0; background: #fbfcfe; color: var(--ink); font: inherit; transition: border-color .2s, box-shadow .2s, background .2s; }
-      .form-control::placeholder { color: #9aa6b8; }
-      .form-control:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(45,156,219,.12); }
-      .grow-button { width: 100%; border: 0; border-radius: 10px; padding: 12px 18px; background: var(--accent); color: #fff; cursor: pointer; font: inherit; font-weight: 700; transition: background .2s, transform .2s, box-shadow .2s; }
-      .grow-button:hover { background: var(--accent-dark); box-shadow: 0 7px 16px rgba(45,156,219,.24); }
-      .grow-button:active { transform: translateY(1px); }
-      .switch-copy { margin: 19px 0 0; text-align: center; color: var(--muted); font-size: 13px; }
-      .switch-copy a { color: var(--accent-dark); font-weight: 700; text-decoration: none; }
-      .switch-copy a:hover { text-decoration: underline; }
-      .helper { margin: 5px 0 0; text-align: center; color: #9aa6b8; font-size: 12px; }
-      .register-container { margin-top: 23px; padding-top: 23px; border-top: 1px solid var(--line); }
-      .register-title { margin: 0 0 16px; color: var(--ink); font-size: 15px; font-weight: 700; }
-      .hidden { display: none; }
-      @keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-      @media (max-width: 480px) { body { padding: 12px; } .card-header, .card-body { padding-left: 22px; padding-right: 22px; } }
+      .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .modal-backdrop + div {
+        overflow: auto;
+      }
+      .modal-body,
+      .content {
+        padding: 0;
+      }
     </style>
   </head>
-  <body>
-    <main class="login-shell">
-      <section class="login-card" aria-labelledby="page-title">
-        <header class="card-header">
-          <div class="brand-mark" aria-hidden="true">G</div>
-          <h1 id="page-title">Log in with your GTopiaID</h1>
-          <p class="subtitle">Access your account to continue playing.</p>
-        </header>
-        <div class="card-body">
-          <form method="POST" action="/player/growid/login/validate" autocomplete="off">
-            <input name="_token" type="hidden" value="<%= token %>" />
-            <div class="form-group">
-              <label for="login-name">GTopiaID name</label>
-              <input id="login-name" class="form-control" placeholder="Enter your GTopiaID" name="growId" type="text" minlength="3" maxlength="20" required />
+  <body style="background-color: rgba(0, 0, 0, 0)">
+    <button type="button" class="btn btn-primary hidden" data-toggle="modal" id="modalButton" data-target="#modalShow" data-backdrop="static" data-keyboard="false"></button>
+    <div class="content">
+      <section class="common-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="row">
+                <div class="modal fade product-list-popup" id="modalShow" tabindex="-1" role="dialog" aria-hidden="false">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="content">
+                          <section class="common-box">
+                            <div class="container">
+                              <div class="section-title center-align">
+                                <h2>Log in with your GTopiaID</h2>
+                              </div>
+                              <div class="row div-content-center">
+                                <div class="col-md-12 col-sm-12">
+                                  <form method="POST" action="/player/growid/login/validate" accept-charset="UTF-8" class="" role="form" required="required" autocomplete="off">
+                                    <input name="_token" type="hidden" value="<%= token %>"/>
+                                    <div class="form-group">
+                                      <input id="login-name" class="form-control grow-text" placeholder="Your GTopiaID Name *" name="growId" type="text" minlength="3" maxlength="18" required/>
+                                    </div>
+                                    <div class="form-group">
+                                      <input id="password" class="form-control grow-text" placeholder="Your GTopiaID Password *" name="password" type="password" minlength="4" maxlength="18" required/>
+                                    </div>
+                                    <div class="form-group text-center">
+                                      <input class="btn btn-lg btn-primary grow-button" type="submit" value="Log in"/>
+                                    </div>
+                                  </form>
+                                  <p class="center-align" style="margin-top: 12px; font-size: 14px;">
+                                    Don't have an account?
+                                    <a href="#" id="createGrowid" style="color: #2d9cdb; font-weight: bold;">Create a growid</a>
+                                  </p>
+                                  <p class="center-align" style="margin-top: 4px; font-size: 12px; color: #888;">
+                                    New players must register through this page before playing.
+                                  </p>
+                                  <div id="registerContainer" style="display: none; margin-top: 18px; border-top: 1px solid #e2e2e2; padding-top: 18px;">
+                                    <form method="POST" action="/player/growid/login/validate" accept-charset="UTF-8" class="" role="form" autocomplete="off" id="registerForm">
+                                      <input name="_token" type="hidden" value="<%= token %>"/>
+                                      <div class="form-group">
+                                        <input id="reg-growid" class="form-control grow-text" placeholder="Choose your GTopiaID *" name="growId" type="text" minlength="3" maxlength="18" required/>
+                                      </div>
+                                      <div class="form-group">
+                                        <input id="reg-password" class="form-control grow-text" placeholder="Create a password *" name="password" type="password" minlength="4" maxlength="18" required/>
+                                      </div>
+                                      <div class="form-group">
+                                        <input id="reg-email" class="form-control grow-text" placeholder="Your Email (for password recovery) *" name="email" type="email" required/>
+                                      </div>
+                                      <div class="form-group text-center">
+                                        <input class="btn btn-lg btn-primary grow-button" type="submit" value="Create GrowID"/>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input id="password" class="form-control" placeholder="Enter your password" name="password" type="password" minlength="4" maxlength="25" required />
-            </div>
-            <button class="grow-button" type="submit">Log in</button>
-          </form>
-          <p class="switch-copy">Don't have an account? <a href="#" id="createGrowid">Create a GTopiaID</a></p>
-          <p class="helper">New players must register through this page before playing.</p>
-          <div id="registerContainer" class="register-container hidden">
-            <p class="register-title">Create your GTopiaID</p>
-            <form method="POST" action="/player/growid/login/validate" autocomplete="off">
-              <input name="_token" type="hidden" value="<%= token %>" />
-              <div class="form-group">
-                <label for="reg-growid">GTopiaID name</label>
-                <input id="reg-growid" class="form-control" placeholder="Choose a GTopiaID" name="growId" type="text" minlength="3" maxlength="20" required />
-              </div>
-              <div class="form-group">
-                <label for="reg-password">Password</label>
-                <input id="reg-password" class="form-control" placeholder="Create a password" name="password" type="password" minlength="4" maxlength="25" required />
-              </div>
-              <div class="form-group">
-                <label for="reg-email">Email address</label>
-                <input id="reg-email" class="form-control" placeholder="For password recovery" name="email" type="email" required />
-              </div>
-              <button class="grow-button" type="submit">Create GTopiaID</button>
-            </form>
           </div>
         </div>
       </section>
-    </main>
-    <script>
-      const registerLink = document.getElementById("createGrowid");
-      const registerContainer = document.getElementById("registerContainer");
-      const loginForm = document.querySelector(".card-body > form");
-      let registerMode = false;
-      registerLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        registerMode = !registerMode;
-        registerContainer.classList.toggle("hidden", !registerMode);
-        loginForm.classList.toggle("hidden", registerMode);
-        registerLink.textContent = registerMode ? "Back to login" : "Create a GTopiaID";
-        document.getElementById("page-title").textContent = registerMode ? "Create your GTopiaID" : "Log in with your GTopiaID";
-        if (registerMode) document.getElementById("reg-growid").focus();
-      });
-    </script>
+    </div>
   </body>
+  <!-- JQUERY LIBRARY -->
+  <script src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/jquery/jquery-2.1.4.min.js"></script>
+  <!-- boostrap javascript -->
+  <script src="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/vendors/bootstrap/javascripts/bootstrap.min.js"></script>
+  <script>
+    let clicked = false;
+    $("a").click(function () {
+      if (clicked === false) {
+        clicked = true;
+        return true;
+      }
+      $(this).attr("onclick", "return false;");
+    });
+    $("document").ready(function () {
+      document.onkeydown = (e) => {
+        if (e.key == 123) {
+          e.preventDefault();
+        }
+        if (e.key == "F12") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "I") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.key == "I") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "C") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "J") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.key == "U") {
+          e.preventDefault();
+        }
+      };
+      $("#modalButton").trigger("click");
+      $(".close").on("click", function () {
+        window.location = "/player/validate/close";
+      });
+
+      // Toggle between login and register modes.
+      let registerMode = false;
+      function toggleRegister(show) {
+        registerMode = show;
+        $("#registerContainer").toggle(show);
+        if (show) {
+          $("#login-name").closest(".form-group").hide();
+          $("#password").closest(".form-group").hide();
+        } else {
+          $("#login-name").closest(".form-group").show();
+          $("#password").closest(".form-group").show();
+        }
+      }
+      $("#createGrowid").on("click", function (e) {
+        e.preventDefault();
+        toggleRegister(!registerMode);
+      });
+      // When registering, require name + password + email.
+      $("#registerForm").on("submit", function (e) {
+        const g = $("#reg-growid").val();
+        const p = $("#reg-password").val();
+        const em = $("#reg-email").val();
+        if (!g || !p || !em || p.length < 4 || g.length < 3) {
+          e.preventDefault();
+          alert("Please fill in a valid GrowID (3-18 chars), password (4-18 chars) and email.");
+        }
+      });
+      // $('form').submit($('form .grow-button').attr('disabled', 'true'));
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          for (var i = 0; i < mutation.addedNodes.length; i++) {
+            if (mutation.addedNodes[i].tagName == "DIV") {
+              var thediv = mutation.addedNodes[i];
+              var sw = window.screen.width;
+              if (sw < 667) {
+                $(thediv).css({
+                  transform: "scale(0.75)",
+                  "transform-origin": "0 0",
+                  "-webkit-transform": "scale(0.75)",
+                  "-webkit-transform-origin": "0 0",
+                  overflow: "auto"
+                });
+              }
+            }
+          }
+        });
+      });
+      observer.observe(document.body, {
+        attributes: false,
+        childList: true,
+        characterData: false
+      });
+    });
+  </script>
 </html>
