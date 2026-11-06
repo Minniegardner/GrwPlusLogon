@@ -187,6 +187,10 @@ app.get('/favicon.ico', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'public', 'favicon.ico'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(process.env.PORT || PORT, () => {
+    console.log(`Server running on port ${process.env.PORT || PORT}`);
+  });
+}
+
+module.exports = app;
