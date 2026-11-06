@@ -7,11 +7,14 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node --check index.js"
   },
   "dependencies": {
     "ejs": "^6.0.1",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.5.2"
+    "express-rate-limit": "^8.5.2",
+    "serverless-http": "^3.2.0"
   }
 }
